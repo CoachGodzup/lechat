@@ -1,0 +1,13 @@
+# pedro... il dockerfile S'E' ROTT!
+version: '3.5'
+services:
+  web:
+    container_name: socketio
+    volumes:
+      - ./dist:/app
+    ports:
+      - 8080:1616
+    working_dir:
+      - /app
+    expose:
+      - 1616

@@ -1,0 +1,24 @@
+{
+  "name": "socketio-course",
+  "version": "1.0.0",
+  "description": "a simple chat used to learn socketio",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "socket",
+    "io",
+    "chat"
+  ],
+  "author": "matteo.garza@facile.it",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0"
+  },
+  "devDependencies": {
+    "typescript": "^3.7.2"
+  }
+}

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>🐈 Le Chat</title>
+  <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+  <div class="navbar"></div>
+  <nav class="sidebar"></nav>
+  <section class="body">
+    <h1>Le Chat 🐈</h1>
+    <h2><small>A super simple chat app</small></h2>
+    <ul id="messageList"></ul>
+    <form id="messageForm" action="">
+      <input type="text" id="m" />
+      <button type="submit">📨</button>
+    </form>
+  </section>
+  <section class="footer">
+    Powered with 🐾 with Socket.io
+  </section>
+</body>
+
+<style>
+  body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 16px;
+    color: #333;
+    background-color: #ddd;
+  }
+
+  ul#messageList {
+    background: #eee;
+    width: min(1024px, calc(100vw - 2em));
+    min-height: 50vh;
+    font-family: monospace;
+    color: #337;
+  }
+
+  h1, h2 {
+    margin: 0;
+  }
+
+  section.footer {
+    background: #333;
+    color: #ddd;
+    text-align: center;
+    height: 5vh;
+    padding: 1em;
+    margin-top: 1em;
+  }
+
+  input#m {
+    width: min(1024px, calc(100vw - 5em));
+    border: none;
+    font-family: monospace;
+    padding: .5em .2em;
+  }
+</style>
+
+
+<script>
+  const socket = io();
+  const form = document.getElementById('messageForm')
+  const input = document.getElementById('m')
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault()
+    socket.emit('message', input.value)
+    input.value = ''
+  })
+
+  socket.on('message', (msg) => {
+    const messageList = document.getElementById('messageList');
+    const newMessage = document.createElement('li')
+    newMessage.innerText = msg;
+    messageList.append(newMessage)
+  })
+</script>
+</html>
