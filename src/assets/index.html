@@ -73,11 +73,19 @@
     input.value = ''
   })
 
+  socket.on('login', (info) => {
+    info.messageCache.forEach(msg => createNewMessage(msg))
+  })
+
   socket.on('message', (msg) => {
+    createNewMessage(msg);
+  })
+
+  createNewMessage = (msg) => {
     const messageList = document.getElementById('messageList');
     const newMessage = document.createElement('li')
     newMessage.innerText = msg;
     messageList.append(newMessage)
-  })
+  }
 </script>
 </html>
