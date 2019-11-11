@@ -1,0 +1,54 @@
+$background-color: #ddd;
+$main-color: #373;
+
+@mixin board-centered {
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 16px;
+  color: $main-color;
+  background-color: $background-color;
+}
+
+ul#messageList {
+  @include board-centered();
+  background: #eee;
+  min-height: 50vh;
+  font-family: monospace;
+  color: #337;
+}
+
+h1, h2 {
+  margin: 0;
+}
+
+section.footer {
+  background: #373;
+  color: #ddd;
+  text-align: center;
+  height: 5vh;
+  padding: 1em;
+  margin-top: 1em;
+}
+
+form#messageForm {
+  @include board-centered();
+  padding: 1em 0;
+}
+
+input#m {
+  width: calc(100% - 100px);
+  border: none;
+  border-radius: 2px;
+  font-family: monospace;
+  padding: .5em .2em;
+}
+
+footer {
+  background: $main-color;
+  color: $background-color;
+  text-align: center;
+}
