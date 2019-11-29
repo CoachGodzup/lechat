@@ -12,14 +12,13 @@ ReactDOM.render(
   <div className='body'>
     <Nav title={'🐱 Le Chat'} subtitle={'A super simple chat app'}></Nav>
     <aside>Step aside!</aside>
-    <section>I have a section, I have css ... mmm... section-css!
+    <section>
       <MessageList></MessageList>
       <MessageForm></MessageForm>
     </section>
     <Footer disclaimer={'Made with 🐾 with Socket.io'}></Footer>
   </div>, 
   document.getElementById('root'));
-// <Footer disclaimer={'Made with 🐾 with Socket.io'}></Footer>
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
