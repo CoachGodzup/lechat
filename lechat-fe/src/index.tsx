@@ -6,12 +6,14 @@ import MessageList from './components/MessageList/MessageList'
 import Footer from './components/Footer/Footer'
 
 import * as serviceWorker from './serviceWorker';
-import MessageForm from './components/MessageForm/MessageForm';
+import MessageForm from './components/Form/Form';
 
 ReactDOM.render(
   <div className='body'>
     <Nav title={'🐱 Le Chat'} subtitle={'A super simple chat app'}></Nav>
-    <aside>Step aside!</aside>
+    <aside>
+      Step aside!
+    </aside>
     <section>
       <MessageList></MessageList>
       <MessageForm></MessageForm>

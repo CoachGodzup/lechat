@@ -2,9 +2,16 @@ import * as socketio from "socket.io"
 import { createServer } from "http"
 import * as express from 'express'
 
+export enum MESSAGE_TYPE {'LOGIN', 'LOGOUT', 'SEND', 'RECEIVE'}
+
+export class MESSAGE {
+  type: MESSAGE_TYPE;
+  body: string;
+}
+
 export class ChatServer {
 
-  public static readonly PORT: number = 3000;
+  public static readonly PORT: number = 1616;
   private messageCache: string[] = [];
   private app = express();
   private port: number;
@@ -34,10 +41,10 @@ export class ChatServer {
         messageCache: this.messageCache || []
       })
 
-      socket.on('message', (msg) => {
-        console.log(`message from ${socket.client.id}: ${msg}`)
-        io.emit('message', msg)
-        this.messageCache.push(msg)
+      socket.on(MESSAGE_TYPE.SEND + '', (msg: MESSAGE) => {
+        console.log(`message from ${socket.client.id}: ${msg.body}`)
+        this.messageCache.push(msg.body)
+        io.emit(MESSAGE_TYPE.RECEIVE + '', msg)
       })
 
       socket.on('disconnect', () => {
