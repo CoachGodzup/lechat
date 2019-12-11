@@ -4,9 +4,17 @@ const ENDPOINT = 'localhost:1616'
 
 export enum MESSAGE_TYPE {'LOGIN', 'LOGOUT', 'SEND', 'RECEIVE'}
 export interface ISocketMessage {
-  type: MESSAGE_TYPE,
-  body: object,
-  sender? : string;
+  type: MESSAGE_TYPE;
+  body: any;
+  sender?: string;
+}
+
+export interface IChatMessage extends ISocketMessage {
+  body: string;
+}
+
+export interface IChatDumpMessage extends ISocketMessage {
+  body: IChatMessage[];
 }
 
 class SocketService {

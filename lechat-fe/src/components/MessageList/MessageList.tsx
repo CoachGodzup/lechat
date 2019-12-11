@@ -1,15 +1,19 @@
 import React, {useState} from "react";
 import './MessageList.sass'
-import socketService, { MESSAGE_TYPE, ISocketMessage } from "../../services/socket";
+import socketService, { MESSAGE_TYPE, ISocketMessage, IChatMessage, IChatDumpMessage } from "../../services/socket";
 
-const DEFAULT_MESSAGE_LIST: ISocketMessage[] = []
+const DEFAULT_MESSAGE_LIST: IChatMessage[] = []
 const MessageList = () => {
 
   const [messageArray, setMessageArray] = useState(DEFAULT_MESSAGE_LIST)
   const renderedMessageList: JSX.Element[] = []
 
-  socketService.listen(MESSAGE_TYPE.RECEIVE, (msg: ISocketMessage) => {
+  socketService.listen(MESSAGE_TYPE.RECEIVE, (msg: IChatMessage) => {
     setMessageArray([...messageArray, (msg)])
+  })
+
+  socketService.listen(MESSAGE_TYPE.LOGIN, (dump: IChatDumpMessage) => {
+    setMessageArray([...dump.body])
   })
 
   messageArray.forEach(message => {
