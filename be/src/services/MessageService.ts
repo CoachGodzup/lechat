@@ -1,4 +1,9 @@
-export enum MESSAGE_TYPE {'LOGIN', 'LOGOUT', 'SEND', 'RECEIVE'}
+export enum MESSAGE_TYPE {
+  'LOGIN' = 'LOGIN', 
+  'LOGOUT' = 'LOGOUT', 
+  'SEND' = 'SEND',
+  'RECEIVE' = 'RECEIVE'
+}
 export interface ISocketMessage {
   type: MESSAGE_TYPE;
   body: any;

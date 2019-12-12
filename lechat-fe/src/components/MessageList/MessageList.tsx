@@ -17,14 +17,22 @@ const MessageList = () => {
   })
 
   messageArray.forEach(message => {
-    const messageClass = message.sender === socketService.id ? 'mine' : '';    
-    renderedMessageList.push(<li id={'message' + Math.floor(Math.random() * 100)} className={messageClass}>{message.body}</li>)
+    const messageClass = message.sender === socketService.id ? 'mine' : '';
+    const senderToken = message.sender ? message.sender[0] : '?';
+
+    // todo random color per senderimage
+    // ... e le impronte dei gatti? ;P
+
+    renderedMessageList.push(<li 
+      id={'message' + Math.floor(Math.random() * 100)} 
+      className={messageClass}>
+        <div className="senderImage">{senderToken}</div> 
+        <span>{message.body}</span>
+    </li>)
   })
   
   return (
     <ul className={'message-list'}>
-      <li>ciao</li>
-      <li className="mine">ciao anche a te!</li>
       {renderedMessageList}
     </ul>
   )

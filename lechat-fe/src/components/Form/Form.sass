@@ -1,14 +1,16 @@
 form 
   input[type=text] 
-    width: 200px
+    width: calc(100% - 132px)
     padding: 0.5em 1em
     border: none
 
   button[type=submit]
     border: none
+    box-sizing: border-box
     background: #dd6600
     color: #eeeeee
     padding: 0.5em 1em
+    width: 100px;
     &:hover
       opacity: 0.8
     &:focus
