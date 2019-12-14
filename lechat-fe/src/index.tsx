@@ -7,9 +7,12 @@ import Footer from './components/Footer/Footer'
 
 import * as serviceWorker from './serviceWorker';
 import MessageForm from './components/Form/Form';
+import LoginModal from './components/LoginModal/LoginModal';
 
 ReactDOM.render(
   <div className='body'>
+
+    <LoginModal title={'🐱 Benvenuto'}></LoginModal>
     <Nav title={'🐱 Le Chat'} subtitle={'A super simple chat app'}></Nav>
     <aside>
       Step aside!

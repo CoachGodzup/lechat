@@ -16,7 +16,7 @@ ul
     display: flex
     flex-direction: row-reverse
 
-    .senderImage
+    .sender-image
       width: 2em
       background:#f60
       text-align: center
@@ -26,13 +26,17 @@ ul
       font-weight: bold
       height: 2em
     
-    span
-      display: block
+    div.message-content
+      display: flex
+      flex-direction: column
       padding: .5em
       width: max-content
       border-radius: 1em
       background: #fff
       margin: 0 .4em
+      span.author 
+        color: #f60
+        font-size: 0.7em
 
     &.mine 
       flex-direction: row

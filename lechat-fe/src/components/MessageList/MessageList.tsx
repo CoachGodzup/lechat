@@ -12,29 +12,37 @@ const MessageList = () => {
     setMessageArray([...messageArray, (msg)])
   })
 
-  socketService.listen(MESSAGE_TYPE.LOGIN, (dump: IChatDumpMessage) => {
+  socketService.listen(MESSAGE_TYPE.CONFIRM_LOGIN, (dump: IChatDumpMessage) => {
     setMessageArray([...dump.body])
   })
 
   messageArray.forEach(message => {
     const messageClass = message.sender === socketService.id ? 'mine' : '';
-    const senderToken = message.sender ? message.sender[0] : '?';
+    const senderToken: string = (message.nickname ? message.nickname[0] :
+      message.sender ? message.sender[0] : '?').toUpperCase();
 
-    // todo random color per senderimage
+    // todo random color per sender-image
     // ... e le impronte dei gatti? ;P
 
     renderedMessageList.push(<li 
       id={'message' + Math.floor(Math.random() * 100)} 
       className={messageClass}>
-        <div className="senderImage">{senderToken}</div> 
-        <span>{message.body}</span>
+        <div className="sender-image">{senderToken}</div> 
+        <div className="message-content">
+          <span className={"author"}>{message.nickname}</span>
+          <span className={"body"}>{message.body}</span>
+        </div>
     </li>)
   })
   
   return (
-    <ul className={'message-list'}>
-      {renderedMessageList}
-    </ul>
+    <div>
+      <span>ciao, {socketService.nickname}</span>
+
+      <ul className={'message-list'}>
+        {renderedMessageList}
+      </ul>
+    </div>
   )
 }
 

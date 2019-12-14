@@ -2,15 +2,21 @@ import * as socketio from "socket.io"
 import * as express from 'express'
 import { createServer } from "http"
 import loggerService from "./services/LoggerService";
-import { IChatMessage, MESSAGE_TYPE } from "./services/MessageService";
+import { IChatMessage, MESSAGE_TYPE, ISocketMessage } from "./services/MessageService";
 import storeService from "./services/StoreService";
 import { PORT } from "./services/ConstantsService";
+
+export interface IUser {
+  socket: string;
+  nickname: string;
+}
 
 export class ChatServer {
 
   private app = express();
   private port: number;
   private server: any;
+  private userList: { [socketId: string]: string;} = {};
 
   constructor() {
     // this.app.use(cors());
@@ -30,9 +36,13 @@ export class ChatServer {
 
     // socket io chat managing
     io.on('connection', (socket: socketio.Socket) => {
-      loggerService.log(`user with ${socket.client.id} logged in`)
-      io.to(socket.id).emit(MESSAGE_TYPE.LOGIN + '', {
-        body: storeService.messageCache || []
+      loggerService.log(`user with ${socket.client.id} connected`)
+      socket.on(MESSAGE_TYPE.ATTEMPT_LOGIN, (nicknameMessage: ISocketMessage) => {
+        loggerService.log(`user with ${socket.client.id} logged in: [${JSON.stringify(nicknameMessage)}]`)
+        this.userList[socket.id] = nicknameMessage.nickname;
+        io.to(socket.id).emit(MESSAGE_TYPE.CONFIRM_LOGIN + '', {
+          body: storeService.messageCache || []
+        })
       })
 
       socket.on(MESSAGE_TYPE.SEND + '', (msg: IChatMessage) => {
