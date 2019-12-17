@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import './MessageList.sass'
-import socketService, { MESSAGE_TYPE, ISocketMessage, IChatMessage, IChatDumpMessage } from "../../services/socket";
+import socketService, { MESSAGE_TYPE, IChatMessage, IChatDumpMessage } from "../../services/socket";
 
 const DEFAULT_MESSAGE_LIST: IChatMessage[] = []
 const MessageList = () => {
@@ -36,13 +36,9 @@ const MessageList = () => {
   })
   
   return (
-    <div>
-      <span>ciao, {socketService.nickname}</span>
-
       <ul className={'message-list'}>
         {renderedMessageList}
       </ul>
-    </div>
   )
 }
 

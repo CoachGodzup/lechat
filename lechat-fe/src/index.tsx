@@ -8,6 +8,8 @@ import Footer from './components/Footer/Footer'
 import * as serviceWorker from './serviceWorker';
 import MessageForm from './components/Form/Form';
 import LoginModal from './components/LoginModal/LoginModal';
+import socketService from './services/socket';
+import ContactList from './components/ContactList/ContactList';
 
 ReactDOM.render(
   <div className='body'>
@@ -15,7 +17,8 @@ ReactDOM.render(
     <LoginModal title={'🐱 Benvenuto'}></LoginModal>
     <Nav title={'🐱 Le Chat'} subtitle={'A super simple chat app'}></Nav>
     <aside>
-      Step aside!
+      <ContactList></ContactList>
+      <span>{socketService.nickname || 'devi effettuare il login'}</span>
     </aside>
     <section>
       <MessageList></MessageList>
