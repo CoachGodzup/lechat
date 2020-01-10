@@ -11,13 +11,14 @@ import LoginModal from './components/LoginModal/LoginModal';
 import socketService from './services/socket';
 import ContactList from './components/ContactList/ContactList';
 
+const list = [{name: 'Pippo'}, {name: 'Pluto'}, {name: 'Paperino'}]
+
 ReactDOM.render(
   <div className='body'>
-
     <LoginModal title={'🐱 Benvenuto'}></LoginModal>
     <Nav title={'🐱 Le Chat'} subtitle={'A super simple chat app'}></Nav>
     <aside>
-      <ContactList></ContactList>
+      <ContactList list={list}></ContactList>
       <span>{socketService.nickname || 'devi effettuare il login'}</span>
     </aside>
     <section>

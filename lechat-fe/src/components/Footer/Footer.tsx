@@ -1,10 +1,10 @@
 import * as React from "react";
-import './Footer.sass'
+import css from './Footer.module.sass'
 
 export interface FooterProps {
   disclaimer: string;
 }
 
-const Footer = (props: FooterProps) => <footer><span>{props.disclaimer}</span></footer>
+const Footer = (props: FooterProps) => <footer className={css.Footer}><span>{props.disclaimer}</span></footer>
 
 export default Footer;

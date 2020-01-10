@@ -1,5 +1,5 @@
 import React, {useState, FormEvent} from "react"
-import './Form.sass'
+import css from './Form.module.sass'
 import * as socketService from '../../services/socket'
 import useSendMessageForm from './FormHooks'
 
@@ -14,13 +14,16 @@ const Form = (props: MessageForm) => {
   const {inputs, handleInputChange, handleSubmit} = useSendMessageForm(sendMessage);
 
   return (
-  <form onSubmit={ handleSubmit }>
+  <form className={css.Form} onSubmit={ handleSubmit }>
     <input type="text" 
       name="newMessage"
       id="newMessage"
       onChange={handleInputChange} 
       value={inputs.newMessage}/>
-    <button type="submit">Invia</button>
+    <button 
+      type="submit">
+        Invia
+      </button>
   </form>
 )}
 
