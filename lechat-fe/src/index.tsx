@@ -9,20 +9,18 @@ import * as serviceWorker from './serviceWorker';
 import MessageForm from './components/Form/Form';
 import LoginModal from './components/LoginModal/LoginModal';
 import socketService from './services/socket';
-import ContactList from './components/ContactList/ContactList';
-
-const list = [{name: 'Pippo'}, {name: 'Pluto'}, {name: 'Paperino'}]
+import ContactContainer from './containers/Contacts/ContactContainer';
+import MessageContainer from './containers/Message/MessageContainer';
 
 ReactDOM.render(
   <div className='body'>
     <LoginModal title={'🐱 Benvenuto'}></LoginModal>
     <Nav title={'🐱 Le Chat'} subtitle={'A super simple chat app'}></Nav>
     <aside>
-      <ContactList list={list}></ContactList>
-      <span>{socketService.nickname || 'devi effettuare il login'}</span>
+      <ContactContainer></ContactContainer>
     </aside>
     <section>
-      <MessageList></MessageList>
+      <MessageContainer></MessageContainer>
       <MessageForm></MessageForm>
     </section>
     <Footer disclaimer={'Made with 🐾 with Socket.io'}></Footer>

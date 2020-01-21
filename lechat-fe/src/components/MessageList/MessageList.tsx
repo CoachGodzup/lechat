@@ -2,21 +2,15 @@ import React, {useState} from "react";
 import './MessageList.sass'
 import socketService, { MESSAGE_TYPE, IChatMessage, IChatDumpMessage } from "../../services/socket";
 
-const DEFAULT_MESSAGE_LIST: IChatMessage[] = []
-const MessageList = () => {
+export interface IMessageListProps {
+  list: IChatMessage[] 
+}
 
-  const [messageArray, setMessageArray] = useState(DEFAULT_MESSAGE_LIST)
+const MessageList = (props: IMessageListProps) => {
+
   const renderedMessageList: JSX.Element[] = []
 
-  socketService.listen(MESSAGE_TYPE.RECEIVE, (msg: IChatMessage) => {
-    setMessageArray([...messageArray, (msg)])
-  })
-
-  socketService.listen(MESSAGE_TYPE.CONFIRM_LOGIN, (dump: IChatDumpMessage) => {
-    setMessageArray([...dump.body])
-  })
-
-  messageArray.forEach(message => {
+  props.list.forEach(message => {
     const messageClass = message.sender === socketService.id ? 'mine' : '';
     const senderToken: string = (message.nickname ? message.nickname[0] :
       message.sender ? message.sender[0] : '?').toUpperCase();
