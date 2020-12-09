@@ -15,10 +15,6 @@ const DEFAULT_COOKIE: Cookie = {
 }
 
 class CookieService {
-
-  // ma sono impazzito? i cookie? ma usa lo storage!!!
-
-
   setCookie(newCookie: Cookie): void {
     debugger;
     const newCookieWithDefault = { ...DEFAULT_COOKIE, ...newCookie };

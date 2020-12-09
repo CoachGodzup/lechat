@@ -9,6 +9,7 @@ import { PORT } from "./services/ConstantsService";
 export interface IUser {
   socket: string;
   nickname: string;
+  color: string;
 }
 
 export class ChatServer {
@@ -16,7 +17,7 @@ export class ChatServer {
   private app = express();
   private port: number;
   private server: any;
-  private userList: { [socketId: string]: string;} = {};
+  private userList: { [socketId: string]: IUser;} = {};
 
   constructor() {
     // this.app.use(cors());
@@ -31,6 +32,10 @@ export class ChatServer {
     this.listen()
   }
   
+  private generateRandomColor = ():string => {
+    return '#' + ("000000" + Math.random().toString(16).slice(2, 8).toUpperCase()).slice(-6);
+  };
+
   private initSocket = () => {
     const io = socketio(this.server)
 
@@ -39,9 +44,15 @@ export class ChatServer {
       loggerService.log(`user with ${socket.client.id} connected`)
       socket.on(MESSAGE_TYPE.ATTEMPT_LOGIN, (nicknameMessage: ISocketMessage) => {
         loggerService.log(`user with ${socket.client.id} logged in: [${JSON.stringify(nicknameMessage)}]`)
-        this.userList[socket.id] = nicknameMessage.nickname;
+        const newUser = {
+          socket: socket.id,
+          nickname: nicknameMessage.nickname,
+          color: this.generateRandomColor()
+        }
+        this.userList[socket.id] = newUser
         io.to(socket.id).emit(MESSAGE_TYPE.CONFIRM_LOGIN + '', {
-          body: storeService.messageCache || []
+          body: storeService.messageCache || [],
+          userData: newUser
         })
       })
 
